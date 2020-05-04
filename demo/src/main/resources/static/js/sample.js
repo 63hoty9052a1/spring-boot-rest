@@ -203,6 +203,14 @@ function updateAddress(userId) {
 //	testAjax('delete', param, success_delete, error_delete);
 }
 
+function success_update(delCnt) {
+
+}
+
+function error_update(delCnt) {
+
+}
+
 function success_delete(delCnt) {
 	//alert('削除件数：' + delCnt);
 	$('#movieInfo').DataTable().destroy();
