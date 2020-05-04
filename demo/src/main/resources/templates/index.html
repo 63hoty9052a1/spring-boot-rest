@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Springboot</title>
+<meta charset="utf-8" />
+</head>
+<body>
+	<h1 th:text="${title}"></h1>
+	<table border="1">
+		<tr>
+			<td>ID</td>
+			<td>名前</td>
+			<td>住所</td>
+			<td>郵便番号</td>
+		</tr>
+		<tr th:each="list : ${userList}">
+			<td th:text="*{list.userId}"></td>
+			<td th:text="*{list.userName}"></td>
+			<th:block th:if="${list.userAddressInfo} == null">
+				<td colspan="2">未登録</td>
+			</th:block>
+			<th:block th:each="addr : *{list.userAddressInfo}">
+				<td th:text="${addr.address != null} ? *{addr.address} : '未登録'"/></td>
+				<td th:text="${addr.zipCodeX != null} ? *{addr.zipCodeX} : '未登録'"/></td>
+			</th:block>
+		</tr>
+	</table>
+</body>
+</html>
