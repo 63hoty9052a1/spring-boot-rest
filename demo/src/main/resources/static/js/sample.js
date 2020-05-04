@@ -203,11 +203,11 @@ function updateAddress(userId) {
 //	testAjax('delete', param, success_delete, error_delete);
 }
 
-function success_update(delCnt) {
+function success_update(updCnt) {
 
 }
 
-function error_update(delCnt) {
+function error_update(updCnt) {
 
 }
 
