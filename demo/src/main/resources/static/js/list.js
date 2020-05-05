@@ -1,6 +1,6 @@
 $(function(){
 	// 初期表示_一覧情報取得
-	testAjax('list_rest', [], success_list, error_list);
+	comAjax('movie_list', [], success_list, error_list);
 
 	// 削除ボタンイベント
 	$('#delBtn').click(function() {
@@ -8,13 +8,11 @@ $(function(){
 		      return $(this).val();
 	    }).get();
 
-		// 削除処理
 		deleteMovie(checkValues);
 	});
 
 	// 登録ボタンイベント
 	$('#registBtn').click(function() {
-		// 登録処理
 		registMovieLink();
 	});
 
@@ -23,7 +21,6 @@ $(function(){
 		var comment = $('#inputComment').val();
 
 		if ( e.which == 13 && comment != "") {
-
 			addComment(comment);
 			registComment(comment);
 
@@ -39,7 +36,7 @@ $(function(){
 				return true;
 			}
 
-			if(data[8] == $('#selectMovieCategory').val()){
+			if(data[9] == $('#selectMovieCategory').val()){
 				return true;
 			}
 
@@ -50,85 +47,56 @@ $(function(){
 
 const columns =  [
     {"data":"id",   "width": '1%', "visible": false },
-    {"data":"name", "width": '27%'},
+    {"data":"name", "width": '20%', "orderable": false,
+    	render:function(data, type, row, meta){
+    		return `<div align="center" style="margin-top: 1em;"><textarea  style="border:solid 0px; background-color:rgba(0,0,0,0); font-size:13pt; overflow:hidden; resize: none;" size="15" id="mName_${meta.row}" >${data}</textarea></div>`;
+    	}
+    },
     {"data":"url", "width": '1%', "visible": false },
-    {"data":"thumbnailUrl", "width": '20%',
+    {"data":"thumbnailUrl", "width": '20%', "orderable": false,
     	render:function(data, type, row, meta){
     		var params = meta.settings.aoData[meta.row]._aData;
     		return `<a href="javascript:void(0);" onclick="showMovieArea(\'${params.id}\', \'${params.url}\')"><img border="0" src="${data}" width="120" height="90" alt=""></a>`;
     	}
     },
 
-    {"data":"categoryId", "width": '20%',
-    	render:function(data){
+    {"data":"categoryId", "width": '15%', "orderable": false,
+    	render:function(data, type, row, meta){
 
-    		return createCategoryTag(categoryData, data, 'movieCategory', false);
+    		return createCategoryTag(categoryData, data, 'movieCategory_' + meta.row, false);
     	}
     },
 
-    {"data":"commentCount", "width": '10%'},
+    {"data":"commentCount", "width": '15%'},
 
-    {"data":"", "defaultContent": "", "width": '10%',
+    {"data":"registDate", "width": '10%'},
+
+    {"data":"", "defaultContent": "", "width": '10%', "orderable": false,
     	render:function(data, type, row, meta){
-    		var params = meta.settings.aoData[meta.row]._aData;
-
     		return `<div align="center"><input type="checkbox" name="delCheck" value="${meta.row}"></div>`;
     	}
     },
 
-    {"data":"", "defaultContent": "", "width": '10%',
+    {"data":"", "defaultContent": "", "width": '10%', "orderable": false,
     	render:function(data, type, row, meta){
     		var newAddress = "";
     		var params = meta.settings.aoData[meta.row]._aData;
-    		if(params.userAddressInfo != null){
-    			newAddress = params.userAddressInfo.address;
-    		}
-    		return `<div align="center"><button onclick="updateAddress(\'${params.userId}\', \'${newAddress}\')">更新</button></div>`;
+
+    		return `<div align="center"><button onclick="updateMovie(\'${params.id}\', \'${meta.row}\')">更新</button></div>`;
     	}
     },
 
     {"data":"categoryId", "width": '1%', "visible": false},
 ];
 
-const columnDefs = [
-	{ "targets": 0, "width": '1%', "visible": false },
-	{ "targets": 1, "width": '27%' },
-	{ "targets": 2, "width": '1%', "visible": false },
-	{ "targets": 3, "width": '20%' },
-	{ "targets": 4, "width": '20%' },
-	{ "targets": 5, "width": '10%' },
-	{ "targets": 6, "width": '10%', "orderable": false },
-	{ "targets": 7, "width": '10%', "orderable": false },
-	{ "targets": 8, "width": '1%', "visible": false },
-];
-
-const language = {
-	sProcessing: '処理中...',
-	sLengthMenu: '_MENU_ 件表示',
-	sZeroRecords: 'データはありません。',
-	sInfo: ' _TOTAL_ 件中 _START_ から _END_ まで表示',
-	sInfoEmpty: ' 0 件中 0 から 0 まで表示',
-	sInfoFiltered: '（全 _MAX_ 件より抽出）',
-	sInfoPostFix: '',
-	sUrl: '',
-	sSearch: '検索 ',
-	oPaginate: {
-		sPrevious: '<',
-		sNext: '>',
-		sSearch: '検索'
-	}
-};
-
 var categoryData;
 //通信成功時処理（一覧情報）
 function success_list(data) {
 	// カテゴリ情報
 	categoryData = data[1];
-	// 登録エリアのカテゴリ生成
+
 	$('#categoryDiv').empty();
 	$('#categoryDiv').append(createCategoryTag(categoryData, 0, 'registMovieCategory', false));
-
-	// テーブルヘッダのカテゴリ生成
 	$('#list_categoryDiv').empty();
 	$('#list_categoryDiv').append(createCategoryTag(categoryData, 0, 'selectMovieCategory', true));
 
@@ -137,10 +105,11 @@ function success_list(data) {
 		destroy: true,
 		data: data[0],
 		autowidth: false,
+		stateSave: true,
+		stateDuration: -1,
+		order: [ 6, "desc" ],
 		columns: columns,
-		//columnDefs: columnDefs,
 		language: language,
-		//pagingType: "full_numbers",
 		lengthMenu: [ 5, 10, 15, 20, 50, 100 ],
 		displayLength: 5,
 		scrollX: false,
@@ -154,16 +123,14 @@ function success_list(data) {
 }
 
 // 通信失敗時処理（一覧情報）
-function error_list(request, status) {
-	//showErrorTable(request, status);
-}
+function error_list(request, status) {}
 
 function createCategoryTag(data, selectedNo, tagId, isSort) {
 	var onChangeAttr = isSort ? 'onchange="sortCategory()"' : '';
 	var selectTagStart = '<select ' + onChangeAttr +  ' id="' + tagId + '" style="height:25px;">';
 	var selectTagEnd = '</select>';
 
-	var selectTacOptions = '<option value="0"></option>';
+	var selectTacOptions = '<option value="0">-</option>';
 
 	for(var category of data){
 		var optionTagStart = '<option ';
@@ -181,7 +148,6 @@ function sortCategory() {
 }
 
 function deleteMovie(selectRowsNo) {
-
 	var tableData = $('#movieInfo').DataTable();
 	var params = [];
 
@@ -193,33 +159,38 @@ function deleteMovie(selectRowsNo) {
 
 	if(params.length > 0){
 		bugControl();
-		testAjax('delete', params, success_delete, error_delete);
+		comAjax('delete', params, success_delete, error_delete);
 	}
-
 }
 
-function updateAddress(userId) {
-//	var param = {"userId":userId};
-//	testAjax('delete', param, success_delete, error_delete);
+function updateMovie(id, rowNo) {
+	var tableData = $('#movieInfo').DataTable();
+	var rowData = tableData.context[0].oInit.data[rowNo];
+
+	var inputName = $('#mName_' + rowNo).val();
+	var inputCategory = $('#movieCategory_'  + rowNo).val();
+
+	if(!(inputName == rowData.name && inputCategory == rowData.categoryId)){
+		var param = {"id": rowData.id, "name": inputName, "categoryId": inputCategory};
+		comAjax('update_movie', param, success_update, error_update);
+	}
 }
 
 function success_update(updCnt) {
-
+	if(updCnt > 0){
+		$('#movieInfo').DataTable().destroy();
+		comAjax('movie_list', [], success_list, error_list);
+	}
 }
 
-function error_update(updCnt) {
-
-}
+function error_update(updCnt) {}
 
 function success_delete(delCnt) {
-	//alert('削除件数：' + delCnt);
 	$('#movieInfo').DataTable().destroy();
-	testAjax('list_rest', [], success_list, error_list);
+	comAjax('movie_list', [], success_list, error_list);
 }
 
-function error_delete(request, status) {
-	//showErrorTable(request, status);
-}
+function error_delete(request, status) {}
 
 function showMovieArea(id, url){
 	$('#movieFrame').empty();
@@ -229,26 +200,23 @@ function showMovieArea(id, url){
 	$('#movieFrame').append('<iframe style="position: absolute; top: 0; right: 0; width: 100%; height: 100%;" src="' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
 	$('#mId').val(id);
 
-	// コメント取得
 	var param = {"mid": id};
-	testAjax('comment', param, success_comment, error_comment);
+	comAjax('comment', param, success_comment, error_comment);
 }
 
 function registComment(comment){
 	var param = {"mid": $('#mId').val(), "comment": comment};
-	testAjax('regist_comment', param, success_registComment, error_registComment);
+	comAjax('regist_comment', param, success_registComment, error_registComment);
 }
 
 function success_registComment(data) {
 	$('#commentRow').empty();
-	// コメント取得
+
 	var param = {"mid": $('#mId').val()};
-	testAjax('comment', param, success_comment, error_comment);
+	comAjax('comment', param, success_comment, error_comment);
 }
 
-function error_registComment() {
-
-}
+function error_registComment() {}
 
 function registMovieLink(){
 	var movieName =  $('#movieName').val();
@@ -256,29 +224,22 @@ function registMovieLink(){
 	var movieCategory = $('#registMovieCategory option:selected').val();
 
 	var param = {"name": movieName, "url": movieLink, "categoryId": movieCategory};
-	testAjax('regist_movie_link', param, success_registMovieLink, error_registMovieLink);
+	comAjax('regist_movie_link', param, success_registMovieLink, error_registMovieLink);
 }
 
 function success_registMovieLink() {
-
 	bugControl();
 
 	$('#movieInfo').DataTable().destroy();
-	testAjax('list_rest', [], success_list, error_list);
-
-
+	comAjax('movie_list', [], success_list, error_list);
 }
 
 function bugControl() {
-	// scrollY適用時、テーブルを再ロード後、drawからの「ext.search.push」イベントで
-	// ヘッダ項目の読込エラーが起きてテーブルズレるのため、再ロード前に以下を実行
 	$('#selectMovieCategory').val(999);
 	$('#movieInfo').DataTable().draw();
 }
 
-function error_registMovieLink() {
-
-}
+function error_registMovieLink() {}
 
 
 function success_comment(data) {
@@ -287,9 +248,7 @@ function success_comment(data) {
 	}
 }
 
-function error_comment() {
-
-}
+function error_comment() {}
 
 function addComment(comment){
 	$('#commentRow').append('<tr><td style="text-align:left; border:inset 0px"><font size="2" color="white">' + comment + '</font></td></tr>');

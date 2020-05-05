@@ -1,0 +1,123 @@
+.baseTable{
+	border-collapse:collapse;
+	width:90%;
+	margin:1em 0;
+	background-color:transparent;
+}
+
+.baseTable td.registTdArea{
+	width: 610px;
+}
+.baseTable td.registTdButtom{
+	vertical-align: bottom;
+}
+
+.movieList{
+  border-collapse:separate;
+  border-spacing: 5px;
+  width: 1000px;
+  /* table-layout: fixed; */
+  /* margin-left: 2px; */
+}
+
+.movieList thead{
+	background-color:#E5E5E5
+}
+
+.movieList thead th{
+  background-color: #c79852;
+  color: white;
+  border:solid 1px #927141;
+}
+
+.movieList tbody{
+	background-color:transparent;
+}
+
+.movieList tbody tr td{
+  background-color: #e4d4bc;
+  border:solid 1px #af9d85;
+
+}
+
+.movieList th,table td{
+  border-radius: 3px;
+  text-align: center;
+  padding: 5px 0;
+
+}
+
+.embeddedMovie{
+	background: #000000;
+	width:100%;
+	height:100%;
+}
+
+.embeddedMovie thead{
+	background-color:#ffffff;
+}
+
+.embeddedMovie .comment-table-out{
+	vertical-align:bottom;
+}
+
+.embeddedMovie div.scrollBox{
+	border		: 1px black solid;
+	margin		: 0px;
+	position:relative;
+	height:90%;
+	width:270px;
+	overflow-x: hidden;
+	overflow-y:auto;
+}
+
+.embeddedMovie div.scrollBox .commentDiv{
+	position:absolute;
+	bottom:0;
+}
+
+.commentTable{
+	color:#FFFFFF;
+	background: #000000;
+}
+
+.commentTable tbody td{
+	text-align: left;
+}
+
+.registMovieForm {
+	width: 600px;
+}
+
+.registMovieForm td.item{
+	text-align: center;
+	width: 20%;
+}
+
+.registMovieForm td.inputItem{
+	text-align: left;
+	width: 80%;
+}
+
+#movieArea{
+	display: none;
+}
+
+#movieFrame{
+	position: relative;
+	width: 100%;
+    height:0;
+    padding-top:75%;
+}
+
+#listDiv{
+  width: 1000px;
+  /*
+  height: 480px;
+  overflow: auto;
+  */
+}
+
+#registDiv{
+	text-align: left;
+}

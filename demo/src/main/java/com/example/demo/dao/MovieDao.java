@@ -23,4 +23,6 @@ public interface MovieDao {
 	public int registComment(MovieCommentEntity mce, HttpServletRequest request);
 
 	public int registMovieLink(MovieEntity me, HttpServletRequest request);
+
+	public int updateMovie(MovieEntity me, HttpServletRequest request);
 }

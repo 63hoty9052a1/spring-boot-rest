@@ -79,4 +79,9 @@ public class MovieService {
 
 		return movieDao.registMovieLink(me, request);
 	}
+
+	public int updateMovie(MovieEntity me, HttpServletRequest request) {
+
+		return movieDao.updateMovie(me, request);
+	}
 }

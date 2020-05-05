@@ -30,23 +30,21 @@ public class MovieEntity {
 	@Column(name = "comment_count")
 	private String commentCount;
 
-	//	@Embedded
 	@Column(name = "category_id")
 	private Integer categoryId;
 
-//	@Column(name = "delete_flag", insertable = false, updatable = false)
 	private Integer deleteFlag;
 
-//	@Embedded
-//	protected CategoryEntity categoryEntity;
-//
-//	public CategoryEntity getCategoryEntity() {
-//		return categoryEntity;
-//	}
-//
-//	public void setCategoryEntity(CategoryEntity categoryEntity) {
-//		this.categoryEntity = categoryEntity;
-//	}
+	@Column(name = "regist_date")
+	private String registDate;
+
+	public String getRegistDate() {
+		return registDate;
+	}
+
+	public void setRegistDate(String registDate) {
+		this.registDate = registDate;
+	}
 
 	public Integer getId() {
 		return id;

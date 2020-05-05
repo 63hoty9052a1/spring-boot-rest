@@ -31,6 +31,7 @@ public class MovieDaoImpl implements MovieDao{
 			" ,t1.note " +
 			" ,t2.category_id " +
 			" ,t1.delete_flag " +
+			" ,to_char(t1.regist_date, 'yyyy/mm/dd hh24:mm:ss') as regist_date" +
 			" ,(SELECT count(t3.mid) FROM movie_comment t3 WHERE t1.id = t3.mid) as comment_count " +
 			"FROM  " +
 			"	m_movie t1 " +
@@ -73,6 +74,15 @@ public class MovieDaoImpl implements MovieDao{
 	private static final String  INSERT_MOVIE_LINK =
 			"INSERT INTO m_movie(name, url, thumbnail_url, note, category_id) " +
 			" VALUES ( ?1, ?2, ?3, ?4, ?5 )";
+
+	private static final String  UPDATE_MOVIE =
+			"UPDATE m_movie " +
+			"SET name = ?1 " +
+				",category_id = ?2 " +
+				",update_date = CURRENT_TIMESTAMP " +
+				",remote_address = ?3 " +
+			" WHERE id = ?4";
+
 
 	@Override
 	public List<MovieEntity> getMovieInfo() {
@@ -134,6 +144,17 @@ public class MovieDaoImpl implements MovieDao{
 		paramMap.put(5, me.getCategoryId());
 
 		return EntityManegarUtil.executeUpadate(INSERT_MOVIE_LINK, em, paramMap);
+	}
+
+	@Override
+	public int updateMovie(MovieEntity me, HttpServletRequest request) {
+		Map<Integer, Object> paramMap = new LinkedHashMap<Integer, Object>();
+		paramMap.put(1, me.getName());
+		paramMap.put(2, me.getCategoryId());
+		paramMap.put(3, request.getRemoteAddr());
+		paramMap.put(4, me.getId());
+
+		return EntityManegarUtil.executeUpadate(UPDATE_MOVIE, em, paramMap);
 	}
 
 }
