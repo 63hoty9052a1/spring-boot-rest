@@ -1,4 +1,4 @@
-function testAjax(url, param, successFnc, errorFnc) {
+function comAjax(url, param, successFnc, errorFnc) {
 	var validUrl = window.location.protocol + '//' + window.location.host + '/' + url;
  	$.ajax({
  	 	type		: 'POST',
@@ -15,22 +15,19 @@ function testAjax(url, param, successFnc, errorFnc) {
  	});
 }
 
-function showErrorTable(request, status){
-	var data = [{
- 		"error"			: request.responseText,
- 		"status"		: status
- 	}]
-
- 	const schema =  [
-        {"header":"エラー内容", 			"key":"error"},
-        {"header":"エラーステータス", 		"key":"status"},
- 	]
-
-	$('#errorInfo').columns({
-		data: data,
-		schema: schema,
-		search: false
-	});
-
- 	$('.ui-table-footer').hide();
+const language = {
+		sProcessing: '処理中...',
+		sLengthMenu: '_MENU_ 件表示',
+		sZeroRecords: 'データはありません。',
+		sInfo: ' _TOTAL_ 件中 _START_ から _END_ まで表示',
+		sInfoEmpty: ' 0 件中 0 から 0 まで表示',
+		sInfoFiltered: '（全 _MAX_ 件より抽出）',
+		sInfoPostFix: '',
+		sUrl: '',
+		sSearch: '絞り込み：',
+		oPaginate: {
+			sPrevious: '<',
+			sNext: '>',
+			sSearch: '検索'
+		},
 }
