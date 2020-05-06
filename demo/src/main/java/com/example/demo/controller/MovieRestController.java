@@ -17,7 +17,7 @@ import com.example.demo.entity.MovieEntity;
 import com.example.demo.service.MovieService;
 
 @RestController
-public class TestRestController {
+public class MovieRestController {
 
 	@Autowired
 	MovieService movieService;
