@@ -41,16 +41,16 @@ Youtubeの動画（動画のリンクアドレス）を登録することで、�
 ```
 一覧表示
 ```
-### ![シーケンス図1](https://user-images.githubusercontent.com/64893747/81171137-d9ea3680-8fd6-11ea-99c4-4ee7aa60d596.jpg)
+![一覧検索](https://user-images.githubusercontent.com/64893747/81171927-3f8af280-8fd8-11ea-885c-9718fc874622.jpg)
 ```
-一覧表示
+登録/更新/削除
 ```
-### ![シーケンス図2](https://user-images.githubusercontent.com/64893747/81171140-db1b6380-8fd6-11ea-92c3-11070485087c.jpg)
+![登録更新削除](https://user-images.githubusercontent.com/64893747/81171928-3f8af280-8fd8-11ea-974b-c4e79dec224e.jpg)
 ```
-一覧表示
+コメント表示
 ```
-### ![シーケンス図3](https://user-images.githubusercontent.com/64893747/81171142-dbb3fa00-8fd6-11ea-9900-4c1b174b8fc4.jpg)
+![コメント検索](https://user-images.githubusercontent.com/64893747/81171924-3dc12f00-8fd8-11ea-924a-284e5b6be4a8.jpg)
 ```
-一覧表示
+コメント追加
 ```
-### ![シーケンス図4](https://user-images.githubusercontent.com/64893747/81171145-dc4c9080-8fd6-11ea-88c8-cf2b429f1eed.jpg)
+![コメント登録](https://user-images.githubusercontent.com/64893747/81171926-3ef25c00-8fd8-11ea-8878-3b68e06fe4d4.jpg)
