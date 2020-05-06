@@ -101,7 +101,7 @@ function success_list(data) {
 	$('#list_categoryDiv').append(createCategoryTag(categoryData, 0, 'selectMovieCategory', true));
 
 	// 一覧テーブル
-	var sss = $('#movieInfo').DataTable({
+	$('#movieInfo').DataTable({
 		destroy: true,
 		data: data[0],
 		autowidth: false,
