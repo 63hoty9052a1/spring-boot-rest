@@ -32,4 +32,4 @@ Youtubeの動画（動画のリンクアドレス）を登録することで、�
 
 ## アプリケーションのUML図
 - ER図
-![er図](https://user-images.githubusercontent.com/64893747/81170565-df934c80-8fd5-11ea-9e19-eb17e9d1ab3d.jpg)
+### ![er図](https://user-images.githubusercontent.com/64893747/81170565-df934c80-8fd5-11ea-9e19-eb17e9d1ab3d.jpg)
