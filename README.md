@@ -25,6 +25,8 @@ Youtubeの動画（動画のリンクアドレス）を登録することで、�
     - ビルドツール：Maven（Sprign Bootプロジェクト作成時に設定）
     - ORM：Spring Data JPA（内部はHibernateでSprign Bootプロジェクト作成時に設定）
     - HikariCP（Sprign Bootプロジェクト作成時に設定）
+    - 主要ライブラリ
+        - JSONとJavaBeanの相互変換：Jackson（Sprign Bootプロジェクト作成時に設定）
 
 - データ層
     - データベース：PostgreSQL
