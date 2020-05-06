@@ -12,3 +12,20 @@ Youtubeの動画（動画のリンクアドレス）を登録することで、�
 - Youtubeの動画（動画のリンクアドレス）登録
 - 登録した動画の一覧表示、削除、更新
 - 登録した動画の再生とコメント追加
+
+### 利用技術（フレームワークおよびライブラリ）
+- アプリケーション層
+    - フレームワーク：Spring Boot
+    - ビルドツール：Maven（Sprign Bootプロジェクト作成時に設定）
+    - ORM：Spring Data JPA（内部はHibernateでSprign Bootプロジェクト作成時に設定）
+    - HikariCP（Sprign Bootプロジェクト作成時に設定）
+
+- データ層
+    - データベース：PostgreSQL
+
+- プレゼンテーション層
+    - テンプレートエンジン：Thymelieaf（Sprign Bootプロジェクト作成時に設定）
+    - JavaScript
+        - Ajax
+        - Jquery
+        - DataTables
