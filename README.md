@@ -8,6 +8,9 @@ Springフレームワークを使用したRest APIの実装サンプルです。
 ## 作成期間
 10日
 
+## 所感
+サーバーからのレスポンスとして固有のデータ（JSON）を返すため、画面の表示整形に言語やフレームワーク固有のテンプレートエンジンを使用しなければビューとモデルを完全に分離できるのでシステムの換装がしやすいと思った。
+
 ## アプリケーションの概要
 Youtubeの動画（動画のリンクアドレス）を登録することで、その動画に紐付くデータとしてabemaTVやニコニコ動画のようなコメントを追加および、表示することが出来るWebアプリケーションです。
 
@@ -24,7 +27,7 @@ Youtubeの動画（動画のリンクアドレス）を登録することで、�
     - フレームワーク：Spring Boot
     - ビルドツール：Maven（Sprign Bootプロジェクト作成時に設定）
     - ORM：Spring Data JPA（内部はHibernateでSprign Bootプロジェクト作成時に設定）
-    - コネクションプール：HikariCP（Sprign Bootプロジェクト作成時に設定）
+    - HikariCP（Sprign Bootプロジェクト作成時に設定）
     - 主要ライブラリ
         - JSONとJavaBeanの相互変換：Jackson（Sprign Bootプロジェクト作成時に設定）
 
@@ -32,7 +35,6 @@ Youtubeの動画（動画のリンクアドレス）を登録することで、�
     - データベース：PostgreSQL
 
 - プレゼンテーション層
-    - テンプレートエンジン：Thymelieaf（Sprign Bootプロジェクト作成時に設定）
     - JavaScript
         - Ajax
         - Jquery
