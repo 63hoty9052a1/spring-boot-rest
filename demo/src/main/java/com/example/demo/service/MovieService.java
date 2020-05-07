@@ -53,10 +53,6 @@ public class MovieService {
 
 	public int registMovieLink(MovieEntity me, HttpServletRequest request) {
 
-		System.out.println(me.getUrl());
-		System.out.println(me.getName());
-		System.out.println(me.getCategoryId());
-
 		boolean isYoutubeUrl = me.getUrl().matches("^https?:\\/\\/www.youtube.com\\/watch\\?v=.*");
 
 		String embeddedUrl = "https://www.youtube.com/embed/";
